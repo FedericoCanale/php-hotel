@@ -12,6 +12,19 @@
     <div class="container mt-5">
     <h1>PHP Hotel</h1>
 
+    <form method="GET" class="mb-3">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="parking" value="1" <?php if (isset($_GET['parking'])) echo 'checked'; ?>>
+            <label class="form-check-label">Solo con parcheggio</label>
+        </div>
+        <div class="mt-2">
+            <label>Voto minimo:</label>
+            <input type="number" name="vote" min="1" max="5" value="<?php echo $_GET['vote'] ?? ''; ?>">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Filtra</button>
+        <a href="?" class="btn btn-secondary mt-2">Reset</a>
+    </form>
+
     <?php
 
     $hotels = [
@@ -67,6 +80,9 @@
             <tbody>";
 
     foreach ($hotels as $hotel) {
+        if (isset($_GET['parking']) && !$hotel['parking']) continue;
+        if (!empty($_GET['vote']) && $hotel['vote'] < $_GET['vote']) continue;
+
         $parking = $hotel['parking'] ? 'Sì' : 'No';
 
         echo "<tr>
