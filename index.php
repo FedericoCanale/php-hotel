@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>php-hotel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <H1>PHP Hotel</H1>
-
-
+    <div class="container mt-5">
+    <h1>PHP Hotel</h1>
 
     <?php
 
@@ -54,16 +54,33 @@
 
     ];
 
+    echo "<table class='table table-striped'>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Descrizione</th>
+                    <th>Parcheggio</th>
+                    <th>Voto</th>
+                    <th>Distanza dal centro</th>
+                </tr>
+            </thead>
+            <tbody>";
+
     foreach ($hotels as $hotel) {
         $parking = $hotel['parking'] ? 'Sì' : 'No';
 
-        echo "<h2>{$hotel['name']}</h2>
-              <h3>{$hotel['description']}</h3>
-              <p>Parcheggio: $parking</p>
-              <p>Voto: {$hotel['vote']}</p>
-              <p>Distanza dal centro: {$hotel['distance_to_center']} km</p>";
+        echo "<tr>
+                <td>{$hotel['name']}</td>
+                <td>{$hotel['description']}</td>
+                <td>$parking</td>
+                <td>{$hotel['vote']}</td>
+                <td>{$hotel['distance_to_center']} km</td>
+              </tr>";
     }
+
+    echo "</tbody></table>";
     ?>
+    </div>
 </body>
 
 </html>
